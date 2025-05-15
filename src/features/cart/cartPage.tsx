@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../../app/store';
 import { removeFromCart, changeQuantity, clearCart } from './cartSlice';
+import { addOrder } from '../history/historySlice';
+import { v4 as uuidv4 } from 'uuid';
 
 const CartPage = () => {
   const items = useSelector((state: RootState) => state.cart.items);
@@ -22,6 +24,14 @@ const CartPage = () => {
   };
 
   const handleSubmit = () => {
+    dispatch(
+      addOrder({
+        id: uuidv4(),
+        items: items,
+        total: total,
+        timestamp: Date.now(),
+      }),
+    );
     alert('訂單已送出！');
     dispatch(clearCart());
   };
