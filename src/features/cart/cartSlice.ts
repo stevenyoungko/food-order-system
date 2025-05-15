@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { MenuItem } from '../menu/menuSlice';
 
 export interface CartItem {
   id: string;
@@ -19,10 +20,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (
-      state,
-      action: PayloadAction<{ id: string; name: string; price: number }>,
-    ) => {
+    addToCart: (state, action: PayloadAction<MenuItem>) => {
       const item = state.items.find((i) => i.id === action.payload.id);
       if (item) {
         item.quantity += 1;
