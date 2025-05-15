@@ -1,4 +1,6 @@
-export const menuData = [
+import type { MenuCategory } from '../features/menu/menuSlice';
+
+export const menuData: MenuCategory[] = [
   {
     id: 'c1',
     name: '中式',

@@ -1,8 +1,21 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../../app/store';
+import { addToCart } from '../cart/cartSlice';
+import type { MenuItem } from './menuSlice';
 
 const MenuPage = () => {
+  const dispatch = useDispatch();
   const categories = useSelector((state: RootState) => state.menu.categories);
+
+  const handleAddToCart = (food: MenuItem) => {
+    dispatch(
+      addToCart({
+        id: food.id,
+        name: food.name,
+        price: food.price,
+      }),
+    );
+  };
 
   return (
     <div className="p-3">
@@ -16,7 +29,10 @@ const MenuPage = () => {
                 <span>
                   {food.name} - ${food.price}
                 </span>
-                <button className="ml-2 text-xs px-2 py-0.5 border rounded hover:bg-gray-100">
+                <button
+                  className="ml-2 text-xs px-2 py-0.5 border rounded hover:bg-gray-100"
+                  onClick={() => handleAddToCart(food)}
+                >
                   加入購物車
                 </button>
               </li>
