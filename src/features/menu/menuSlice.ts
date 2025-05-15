@@ -11,4 +11,4 @@ const menuSlice = createSlice({
   reducers: {},
 });
 
-export default menuSlice.reducer; 
+export default menuSlice.reducer;
