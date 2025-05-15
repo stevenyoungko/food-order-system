@@ -37,18 +37,18 @@ const CartPage = () => {
         <thead>
           <tr className="border-b">
             <th className="text-left py-1">品項</th>
-            <th className="w-20">單價</th>
-            <th className="w-24">數量</th>
-            <th className="w-20">小計</th>
-            <th className="w-12"></th>
+            <th className="w-24 text-center">單價</th>
+            <th className="w-20 text-center">數量</th>
+            <th className="w-20 text-center">小計</th>
+            <th className="w-20">操作</th>
           </tr>
         </thead>
         <tbody>
           {items.map((item) => (
-            <tr key={item.id} className="border-b last:border-b-0">
+            <tr key={item.id} className="border-b last:border-b-0 h-[60px] ">
               <td>{item.name}</td>
-              <td>${item.price}</td>
-              <td>
+              <td className="w-24 text-center">${item.price}</td>
+              <td className="w-20 text-center">
                 <input
                   type="number"
                   min={1}
@@ -59,10 +59,12 @@ const CartPage = () => {
                   className="w-14 border rounded px-1 py-0.5 text-center"
                 />
               </td>
-              <td>${item.price * item.quantity}</td>
-              <td>
+              <td className="w-20 text-center">
+                ${item.price * item.quantity}
+              </td>
+              <td className="w-20 text-center py-0">
                 <button
-                  className="text-xs text-red-500 hover:underline"
+                  className="text-red-500"
                   onClick={() => handleRemove(item.id)}
                 >
                   移除
@@ -76,10 +78,7 @@ const CartPage = () => {
         <span className="font-bold">總金額：</span>
         <span className="text-lg">${total}</span>
       </div>
-      <button
-        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-        onClick={handleSubmit}
-      >
+      <button className="w-full" onClick={handleSubmit}>
         送出訂單
       </button>
     </div>

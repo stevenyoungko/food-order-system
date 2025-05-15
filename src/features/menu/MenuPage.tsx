@@ -18,7 +18,7 @@ const MenuPage = () => {
   };
 
   return (
-    <div className="p-3">
+    <div className="p-3 max-w-xl mx-auto">
       <h1 className="text-lg mb-3">菜單</h1>
       {categories.map((category) => (
         <div key={category.id} className="mb-5">
