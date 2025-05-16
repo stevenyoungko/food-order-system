@@ -1,54 +1,111 @@
-# React + TypeScript + Vite
+# 餐飲訂餐系統
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一個使用 React 和 Express 構建的現代餐飲訂餐應用，具有實時訂單追蹤功能。
 
-Currently, two official plugins are available:
+## 概述
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+該專案是一個全棧餐飲訂餐系統，前端使用 React/TypeScript，後端使用 Express/MongoDB。該應用允許用戶瀏覽餐點、添加到購物車、下單並查看訂單歷史。
 
-## Expanding the ESLint configuration
+## 專案結構
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+該專案組織為一個 monorepo，包含客戶端和服務器端目錄：
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+food-order-system/
+├── client/             # React 前端
+│   ├── src/
+│   │   ├── app/        # 應用配置
+│   │   ├── features/   # 功能模塊（菜單、購物車、歷史）
+│   │   ├── api/        # API 集成
+│   │   └── ...
+├── server/             # Express 後端
+│   ├── src/
+│   │   ├── controllers/# 請求處理器
+│   │   ├── models/     # Mongoose 數據模型
+│   │   ├── routes/     # API 路由
+│   │   └── index.js    # 服務器入口點
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 技術棧
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 前端
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+- React 19
+- TypeScript
+- Redux Toolkit（狀態管理）
+- TailwindCSS（樣式）
+- Vite（構建工具）
+- Vitest（測試）
+
+### 後端
+
+- Express
+- MongoDB with Mongoose
+- Node.js
+
+## 開始使用
+
+### 前提條件
+
+- Node.js（v18 或更高版本）
+- Yarn 包管理器
+- MongoDB 數據庫
+
+### 安裝
+
+1. 克隆倉庫
+2. 安裝依賴：
+   ```
+   yarn install:all
+   ```
+
+### 運行應用
+
+同時啟動客戶端和服務器：
+
 ```
+yarn dev:all
+```
+
+分別運行它們：
+
+```
+# 僅客戶端
+yarn dev:client
+
+# 僅服務器
+yarn dev:server
+```
+
+### 生產環境構建
+
+```
+yarn build:all
+```
+
+## 功能
+
+- 瀏覽菜單項目
+- 添加項目到購物車
+- 下單
+- 實時訂單狀態更新
+- 查看訂單歷史
+
+## 測試
+
+運行測試：
+
+```
+cd client
+yarn test
+```
+
+## 環境變量
+
+服務器需要以下環境變量：
+
+- `MONGODB_URI`：MongoDB 連接字符串
+
+## 許可證
+
+MIT
