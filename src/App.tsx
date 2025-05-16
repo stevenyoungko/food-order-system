@@ -1,5 +1,5 @@
 import MenuPage from './features/menu/MenuPage';
-import CartPage from './features/cart/cartPage';
+import CartPage from './features/cart/CartPage';
 import HistoryPage from './features/history/HistoryPage';
 
 function App() {
