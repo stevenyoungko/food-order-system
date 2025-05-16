@@ -1,15 +1,38 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import type { RootState } from '../../app/store';
-import { type Order, clearHistory } from './historySlice';
+import type { RootState, AppDispatch } from '../../app/store';
+import {
+  type Order,
+  fetchOrderHistory,
+  clearOrderHistory,
+} from './historySlice';
 import type { CartItem } from '../cart/cartSlice';
 
 const HistoryPage = () => {
-  const orders = useSelector((state: RootState) => state.history.orders);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const { orders, status, error } = useSelector(
+    (state: RootState) => state.history,
+  );
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchOrderHistory());
+    }
+  }, [status, dispatch]);
 
   const handleClearHistory = () => {
-    dispatch(clearHistory());
+    dispatch(clearOrderHistory());
   };
+
+  if (status === 'loading') {
+    return <div className="p-4 text-center">載入中...</div>;
+  }
+
+  if (status === 'failed') {
+    return (
+      <div className="p-4 text-center text-red-500">載入失敗: {error}</div>
+    );
+  }
 
   if (orders.length === 0) {
     return <div className="p-4 text-center text-gray-500">尚無訂單紀錄</div>;

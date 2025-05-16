@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
-import type { RootState } from '../../app/store';
+import type { RootState, AppDispatch } from '../../app/store';
 import { removeFromCart, changeQuantity, clearCart } from './cartSlice';
-import { addOrder } from '../history/historySlice';
+import { addOrderToHistory } from '../history/historySlice';
 import { v4 as uuidv4 } from 'uuid';
 
 const CartPage = () => {
   const items = useSelector((state: RootState) => state.cart.items);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const total = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -23,17 +23,22 @@ const CartPage = () => {
     dispatch(removeFromCart(id));
   };
 
-  const handleSubmit = () => {
-    dispatch(
-      addOrder({
+  const handleSubmit = async () => {
+    try {
+      const order = {
         id: uuidv4(),
         items: items,
         total: total,
         timestamp: Date.now(),
-      }),
-    );
-    alert('訂單已送出！');
-    dispatch(clearCart());
+      };
+
+      await dispatch(addOrderToHistory(order));
+      alert('訂單已送出！');
+      dispatch(clearCart());
+    } catch (error) {
+      console.error('Failed to submit order:', error);
+      alert('訂單送出失敗，請稍後再試！');
+    }
   };
 
   if (items.length === 0) {
