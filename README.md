@@ -1,54 +1,62 @@
-# React + TypeScript + Vite
+# 餐飲訂餐系統 Food Order System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+這是一個使用 React、TypeScript 與 Vite 構建的餐飲訂餐系統。該系統允許使用者瀏覽菜單、將食品添加到購物車，並查看訂單歷史記錄。
 
-Currently, two official plugins are available:
+## 功能特點
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 菜單瀏覽：查看可用的食品和飲料
+- 購物車管理：添加、移除和調整訂單項目
+- 訂單歷史：查看過去的訂單
+- 響應式設計：適應各種設備尺寸
 
-## Expanding the ESLint configuration
+## 技術堆疊
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **前端**:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+  - React 19
+  - TypeScript
+  - Redux Toolkit (狀態管理)
+  - TailwindCSS (樣式)
+  - Vite (構建工具)
+
+- **測試**:
+  - Vitest
+  - React Testing Library
+
+## 安裝與運行
+
+### 前提條件
+
+- Node.js (推薦 v18.0.0 或更高版本)
+- npm 或 yarn
+
+### 安裝步驟
+
+1. 安裝依賴
+
+   ```
+   yarn install
+   ```
+
+2. 啟動開發服務器
+
+   ```
+   yarn dev
+   ```
+
+3. 開啟瀏覽器並訪問 `http://localhost:5173`
+
+## 構建生產版本
+
+```
+yarn build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+生成的檔案將位於 `dist` 資料夾中。
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 運行測試
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```
+yarn test        # 運行所有測試
+yarn test:watch  # 在監視模式下運行測試
 ```
