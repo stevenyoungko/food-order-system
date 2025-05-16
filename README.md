@@ -53,11 +53,11 @@ food-order-system/
 
 ### 安裝
 
-1. 克隆倉庫
-2. 安裝依賴：
-   ```
-   yarn install:all
-   ```
+安裝依賴：
+
+```
+yarn install:all
+```
 
 ### 運行應用
 
@@ -105,7 +105,3 @@ yarn test
 服務器需要以下環境變量：
 
 - `MONGODB_URI`：MongoDB 連接字符串
-
-## 許可證
-
-MIT
